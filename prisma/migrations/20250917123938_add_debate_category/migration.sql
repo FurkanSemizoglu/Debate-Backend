@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "public"."DebateCategory" AS ENUM ('GENERAL', 'POLITICS', 'TECHNOLOGY', 'SCIENCE', 'SPORTS', 'ENTERTAINMENT', 'EDUCATION', 'HEALTH', 'ENVIRONMENT', 'BUSINESS', 'PHILOSOPHY', 'SOCIAL_ISSUES');
+
+-- AlterTable
+ALTER TABLE "public"."Debate" ADD COLUMN     "category" "public"."DebateCategory" NOT NULL DEFAULT 'GENERAL';

@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  surname       String
+  age           Int
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  debates       Debate[]       @relation("UserDebates")
+  refreshTokens RefreshToken[]
+  joinedDebates Debate[]       @relation("JoinedDebates")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Debate {
+  id          String         @id @default(uuid())
+  title       String
+  topic       String
+  category    DebateCategory @default(GENERAL)
+  status      DebateStatus   @default(PENDING)
+  createdAt   DateTime       @default(now())
+  createdById String
+  createdBy   User           @relation("UserDebates", fields: [createdById], references: [id])
+  users       User[]         @relation("JoinedDebates")
+}
+
+/// model Vote {
+///   id        String   @id @default(uuid())
+///   side      Side
+///   createdAt DateTime @default(now())
+///   user      User     @relation(fields: [userId], references: [id])
+///   userId    String
+///   debate    Debate   @relation(fields: [debateId], references: [id])
+///   debateId  String
+/// }
+enum DebateStatus {
+  PENDING
+  LIVE
+  FINISHED
+}
+
+enum DebateCategory {
+  GENERAL
+  POLITICS
+  TECHNOLOGY
+  SCIENCE
+  SPORTS
+  ENTERTAINMENT
+  EDUCATION
+  HEALTH
+  ENVIRONMENT
+  BUSINESS
+  PHILOSOPHY
+  SOCIAL_ISSUES
+}
