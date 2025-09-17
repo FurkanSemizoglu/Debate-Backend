@@ -19,6 +19,7 @@ model User {
   debates       Debate[]       @relation("UserDebates")
   refreshTokens RefreshToken[]
   joinedDebates Debate[]       @relation("JoinedDebates")
+  debateParticipants DebateParticipant[]
 }
 
 model RefreshToken {
@@ -40,6 +41,30 @@ model Debate {
   createdById String
   createdBy   User           @relation("UserDebates", fields: [createdById], references: [id])
   users       User[]         @relation("JoinedDebates")
+  rooms       DebateRoom[]
+}
+
+model DebateRoom {
+  id        String      @id @default(uuid())
+  debate    Debate      @relation(fields: [debateId], references: [id])
+  debateId  String
+  status    RoomStatus  @default(WAITING)
+  startedAt DateTime?   // oda başladıysa
+  endedAt   DateTime?   // oda bittiğinde
+  createdAt DateTime    @default(now())
+
+  participants DebateParticipant[]
+}
+
+model DebateParticipant {
+  id        String          @id @default(uuid())
+  room      DebateRoom      @relation(fields: [roomId], references: [id])
+  roomId    String
+  user      User            @relation(fields: [userId], references: [id])
+  userId    String
+  role      ParticipantRole
+  joinedAt  DateTime        @default(now())
+  leftAt    DateTime?
 }
 
 /// model Vote {
@@ -70,4 +95,16 @@ enum DebateCategory {
   BUSINESS
   PHILOSOPHY
   SOCIAL_ISSUES
+}
+
+enum RoomStatus {
+  WAITING
+  LIVE
+  FINISHED
+}
+
+enum ParticipantRole {
+  PROPOSER   // fikri savunan
+  OPPONENT   // fikri reddeden
+  AUDIENCE   // izleyici
 }

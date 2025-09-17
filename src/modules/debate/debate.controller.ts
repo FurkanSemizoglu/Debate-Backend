@@ -17,6 +17,9 @@ import { DebateService } from './debate.service';
 import { CreateDebateDto } from './Dto/create-debate.dto';
 import { UpdateDebateDto } from './Dto/update-debate.dto';
 import { JoinDebateDto } from './Dto/join-debate.dto';
+import { CreateDebateRoomDto } from './Dto/create-debate-room.dto';
+import { JoinRoomDto } from './Dto/join-room.dto';
+import { UpdateRoomStatusDto } from './Dto/update-room-status.dto';
 import { AuthGuard } from 'src/common/guards/jwt-auth.guard';
 
 @Controller('debates')
@@ -90,21 +93,62 @@ export class DebateController {
     }
   }
 
-/*   @Post('join')
-  async joinDebate(@Request() req, @Body() joinDebateDto: JoinDebateDto) {
+  // Room endpoints
+  @Post('rooms/create')
+  async createRoom(@Request() req, @Body() createDebateRoomDto: CreateDebateRoomDto) {
     try {
-      return await this.debateService.joinDebate(joinDebateDto.debateId, req.user.sub);
+      return await this.debateService.createDebateRoom(req.user.sub, createDebateRoomDto);
     } catch (error) {
       throw error;
     }
   }
 
-  @Post('leave/:debateId')
-  async leaveDebate(@Request() req, @Param('debateId', ParseUUIDPipe) debateId: string) {
+  @Post('rooms/join')
+  async joinRoom(@Request() req, @Body() joinRoomDto: JoinRoomDto) {
     try {
-      return await this.debateService.leaveDebate(debateId, req.user.sub);
+      return await this.debateService.joinDebateRoom(req.user.sub, joinRoomDto);
     } catch (error) {
       throw error;
     }
-  } */
+  }
+
+  @Post('rooms/:roomId/leave')
+  async leaveRoom(@Request() req, @Param('roomId', ParseUUIDPipe) roomId: string) {
+    try {
+      return await this.debateService.leaveDebateRoom(req.user.sub, roomId);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Get('rooms/:debateId')
+  async getDebateRooms(@Param('debateId', ParseUUIDPipe) debateId: string) {
+    try {
+      return await this.debateService.getDebateRooms(debateId);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Get('room/:roomId')
+  async getRoomById(@Param('roomId', ParseUUIDPipe) roomId: string) {
+    try {
+      return await this.debateService.getRoomById(roomId);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Patch('rooms/:roomId/status')
+  async updateRoomStatus(
+    @Request() req, 
+    @Param('roomId', ParseUUIDPipe) roomId: string,
+    @Body() updateRoomStatusDto: UpdateRoomStatusDto
+  ) {
+    try {
+      return await this.debateService.updateRoomStatus(req.user.sub, roomId, updateRoomStatusDto);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
