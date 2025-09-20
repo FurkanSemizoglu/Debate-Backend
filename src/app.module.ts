@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { DebateModule } from './modules/debate/debate.module';
+import { DebateRoomModule } from './modules/debate-room/debate-room.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { DebateModule } from './modules/debate/debate.module';
     }),
     AuthModule, 
     UserModule, 
-    DebateModule
+    DebateModule,
+    DebateRoomModule
   ],
   controllers: [AppController],
   providers: [AppService],

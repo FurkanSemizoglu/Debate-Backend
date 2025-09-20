@@ -12,13 +12,13 @@ import { JwtTokenService } from 'src/common/services/jwt-token.service';
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '1h' },
+        // Token süreleri JwtTokenService'te tanımlı, burada global ayar kaldırıldı
       }),
       inject: [ConfigService],
     }),
   ],
   providers: [AuthService, JwtTokenService],
   controllers: [AuthController],
-  exports: [AuthService]
+  exports: [AuthService, JwtTokenService] // JwtTokenService'i de export et
 })
 export class AuthModule {}

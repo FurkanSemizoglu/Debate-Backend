@@ -77,6 +77,49 @@ export class AuthService {
     };
   } */
 
+  async refresh(refreshToken: string) {
+    try {
+      if (!refreshToken) {
+        throw new UnauthorizedException('Refresh token is required');
+      }
+
+      const tokenRecord = await this.prisma.refreshToken.findUnique({
+        where: { token: refreshToken },
+        include: { user: true },
+      });
+
+      if (!tokenRecord) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      if (tokenRecord.expiresAt < new Date()) {
+        // Expired token'ı sil
+        await this.prisma.refreshToken.delete({
+          where: { id: tokenRecord.id },
+        });
+        throw new UnauthorizedException('Refresh token has expired');
+      }
+
+      // Yeni access token oluştur
+      const newAccessToken = this.jwtTokenService.generateAccessToken(tokenRecord.user);
+
+      return {
+        access_token: newAccessToken,
+        user: {
+          id: tokenRecord.user.id,
+          email: tokenRecord.user.email,
+          name: tokenRecord.user.name,
+          surname: tokenRecord.user.surname,
+        },
+      };
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      throw new UnauthorizedException('Token refresh failed');
+    }
+  }
+
   async logout(userId: string) {
     try {
       if (!userId) {
@@ -174,6 +217,33 @@ export class AuthService {
       }
       
       throw new BadRequestException('Registration failed. Please try again.');
+    }
+  }
+
+  async getUserProfile(userId: string) {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          name: true,
+          surname: true,
+          age: true,
+          email: true,
+          createdAt: true,
+        },
+      });
+
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+
+      return user;
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      throw new BadRequestException('Failed to get user profile');
     }
   }
 }

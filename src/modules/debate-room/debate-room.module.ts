@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-
-import { PrismaModule } from 'src/prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
-import { DebateService } from './debate.service';
-import { DebateController } from './debate.controller';
+import { PrismaModule } from 'src/prisma/prisma.module';
+import { DebateRoomService } from './debate-room.service';
+import { DebateRoomController } from './debate-room.controller';
 
 @Module({
   imports: [
@@ -16,8 +15,8 @@ import { DebateController } from './debate.controller';
       inject: [ConfigService],
     }),
   ],
-  providers: [DebateService],
-  controllers: [DebateController],
-  exports: [DebateService]
+  providers: [DebateRoomService],
+  controllers: [DebateRoomController],
+  exports: [DebateRoomService],
 })
-export class DebateModule {}
+export class DebateRoomModule {}
