@@ -1,62 +1,120 @@
-<div align="center"><div align="center">
+# Debate Backend API<div align="center"><div align="center">
 
 
 
-# 🎯 Debate Backend API# 🎯 Debate Backend API
+NestJS backend for debate management system.
 
 
 
-**A modern REST API for debate management system****A modern REST API for debate management system**
+## Tech Stack# 🎯 Debate Backend API# 🎯 Debate Backend API
+
+- NestJS (Node.js)
+
+- PostgreSQL
+
+- Prisma ORM
+
+- JWT Authentication**A modern REST API for debate management system****A modern REST API for debate management system**
 
 
 
-Built with **NestJS** • **PostgreSQL** • **Prisma ORM**Built with **NestJS** • **PostgreSQL** • **Prisma ORM**
+## Features
+
+- User authentication (register/login)
+
+- Debate creation and managementBuilt with **NestJS** • **PostgreSQL** • **Prisma ORM**Built with **NestJS** • **PostgreSQL** • **Prisma ORM**
+
+- Debate rooms with participant roles
+
+- JWT-based authorization
 
 
 
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
-
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
-
-[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)
-
-[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)
+## Setup[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 
 
 
-</div></div>
+```bash[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+
+git clone https://github.com/FurkanSemizoglu/Debate-Backend.git
+
+cd debate-backend[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)
+
+npm install
+
+```[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)
 
 
+
+## Environment Variables
+
+```env
+
+DATABASE_URL="postgresql://user:password@localhost:5432/debate_db"</div></div>
+
+JWT_SECRET="your-jwt-secret"
+
+PORT=3001
+
+```
 
 ------
 
+## Run
+
+```bash
+
+# Database setup
+
+npx prisma generate## 🚀 Features## 🚀 Features
+
+npx prisma migrate dev
 
 
-## 🚀 Features## 🚀 Features
+
+# Start server
+
+npm run start:dev<div align="center"><div align="center">
+
+```
 
 
 
-<div align="center"><div align="center">
-
-
+API runs on `http://localhost:3001`
 
 ### 🔐 Authentication & Authorization### 🔐 Authentication & Authorization
 
+## API Endpoints
+
 JWT-based authentication • User registration & login • Secure password hashing • Protected routesJWT-based authentication • User registration & login • Secure password hashing • Protected routes
 
+### Auth
+
+- `POST /auth/register` - Register user
+
+- `POST /auth/login` - Login user
+
+- `GET /auth/profile` - Get profile (protected)### 💬 Debate Management  ### 💬 Debate Management  
 
 
-### 💬 Debate Management  ### 💬 Debate Management  
 
-Create & manage debates • Multiple categories • Join/leave functionality • Status trackingCreate & manage debates • Multiple categories • Join/leave functionality • Status tracking
+### DebatesCreate & manage debates • Multiple categories • Join/leave functionality • Status trackingCreate & manage debates • Multiple categories • Join/leave functionality • Status tracking
 
+- `GET /debates/getAllDebates` - List debates
 
+- `POST /debates/createDebate` - Create debate (protected)
+
+- `GET /debates/getDebate/:id` - Get debate details
 
 ### 🏛️ Debate Room System### 🏛️ Debate Room System
 
-Room creation • Multi-role participation • Real-time status • Participant managementRoom creation • Multi-role participation • Real-time status • Participant management
+### Debate Rooms
 
+- `GET /debateRooms` - List roomsRoom creation • Multi-role participation • Real-time status • Participant managementRoom creation • Multi-role participation • Real-time status • Participant management
 
+- `POST /debateRooms/create` - Create room (protected)
+
+- `POST /debateRooms/join` - Join room (protected)
 
 ### 🏗️ Robust Architecture### 🏗️ Robust Architecture
 
