@@ -1,154 +1,154 @@
 # Debate Backend
 
-Bu proje, tartışma/münazara uygulaması için geliştirilmiş bir NestJS backend API'sidir. Kullanıcılar tartışma konuları oluşturabilir, tartışma odalarına katılabilir ve bu odalarda münazara yapabilirler.
+This project is a NestJS backend API developed for a debate/discussion application. Users can create debate topics, join debate rooms, and participate in discussions within these rooms.
 
-## 🚀 Teknolojiler
+## 🚀 Technologies
 
 - **Framework**: NestJS
-- **Veritabanı**: PostgreSQL
+- **Database**: PostgreSQL
 - **ORM**: Prisma
-- **Kimlik Doğrulama**: JWT
-- **Şifreleme**: Bcrypt
+- **Authentication**: JWT
+- **Encryption**: Bcrypt
 - **Validation**: Class Validator
 
-## 📋 Proje Yapısı
+## 📋 Project Structure
 
 ```
 src/
-├── common/                  # Ortak bileşenler
-│   ├── filters/            # Exception filtreleri
-│   ├── guards/             # JWT kimlik doğrulama guard'ları
-│   ├── interceptors/       # Response interceptor'ları
-│   └── services/           # JWT token servisi
-├── config/                 # Konfigürasyon dosyaları
+├── common/                  # Common components
+│   ├── filters/            # Exception filters
+│   ├── guards/             # JWT authentication guards
+│   ├── interceptors/       # Response interceptors
+│   └── services/           # JWT token service
+├── config/                 # Configuration files
 ├── modules/
-│   ├── auth/              # Kimlik doğrulama modülü
-│   ├── debate/            # Tartışma yönetimi modülü
-│   ├── debate-room/       # Tartışma odası modülü
-│   └── user/              # Kullanıcı modülü
-└── prisma/                # Prisma servisi
+│   ├── auth/              # Authentication module
+│   ├── debate/            # Debate management module
+│   ├── debate-room/       # Debate room module
+│   └── user/              # User module
+└── prisma/                # Prisma service
 ```
 
-## 🗄️ Veritabanı Modelleri
+## 🗄️ Database Models
 
-- **User**: Kullanıcı bilgileri
-- **Debate**: Tartışma konuları
-- **DebateRoom**: Tartışma odaları
-- **DebateParticipant**: Tartışma katılımcıları
-- **RefreshToken**: JWT refresh token'ları
+- **User**: User information
+- **Debate**: Debate topics
+- **DebateRoom**: Debate rooms
+- **DebateParticipant**: Debate participants
+- **RefreshToken**: JWT refresh tokens
 
-## 🔧 Kurulum
+## 🔧 Installation
 
-1. Bağımlılıkları yükleyin:
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Veritabanı URL'sini `.env` dosyasında ayarlayın:
+2. Set up the database URL in the `.env` file:
 ```env
 DATABASE_URL="postgresql://username:password@localhost:5432/debate_db"
 ```
 
-3. Prisma migration'larını çalıştırın:
+3. Run Prisma migrations:
 ```bash
 npx prisma migrate dev
 ```
 
-4. Uygulamayı başlatın:
+4. Start the application:
 ```bash
-# Development modu
+# Development mode
 npm run start:dev
 
-# Production modu
+# Production mode
 npm run start:prod
 ```
 
-## 📡 API Endpointleri
+## 📡 API Endpoints
 
 ### 🔐 Authentication (`/auth`)
 
-| Method | Endpoint | Açıklama | Auth |
-|--------|----------|----------|------|
-| POST | `/auth/register` | Yeni kullanıcı kaydı | ❌ |
-| POST | `/auth/login` | Kullanıcı girişi | ❌ |
-| POST | `/auth/refresh` | Token yenileme | ❌ |
-| POST | `/auth/logout` | Kullanıcı çıkışı | ✅ |
-| GET | `/auth/profile` | Kullanıcı profili | ✅ |
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/auth/register` | New user registration | ❌ |
+| POST | `/auth/login` | User login | ❌ |
+| POST | `/auth/refresh` | Token refresh | ❌ |
+| POST | `/auth/logout` | User logout | ✅ |
+| GET | `/auth/profile` | User profile | ✅ |
 
 ### 💬 Debates (`/debates`)
 
-| Method | Endpoint | Açıklama | Auth |
-|--------|----------|----------|------|
-| POST | `/debates/createDebate` | Yeni tartışma oluştur | ✅ |
-| GET | `/debates/getAllDebates` | Tüm tartışmaları listele | ❌ |
-| GET | `/debates/getUsersDebates` | Kullanıcının tartışmaları | ✅ |
-| GET | `/debates/getDebate/:id` | Belirli bir tartışmayı getir | ❌ |
-| PATCH | `/debates/updateDebate/:id` | Tartışmayı güncelle | ✅ |
-| DELETE | `/debates/deleteDebate/:id` | Tartışmayı sil | ✅ |
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/debates/createDebate` | Create new debate | ✅ |
+| GET | `/debates/getAllDebates` | List all debates | ❌ |
+| GET | `/debates/getUsersDebates` | User's debates | ✅ |
+| GET | `/debates/getDebate/:id` | Get specific debate | ❌ |
+| PATCH | `/debates/updateDebate/:id` | Update debate | ✅ |
+| DELETE | `/debates/deleteDebate/:id` | Delete debate | ✅ |
 
 ### 🏠 Debate Rooms (`/debateRooms`)
 
-| Method | Endpoint | Açıklama | Auth |
-|--------|----------|----------|------|
-| POST | `/debateRooms/create` | Yeni tartışma odası oluştur | ✅ |
-| POST | `/debateRooms/join` | Tartışma odasına katıl | ✅ |
-| POST | `/debateRooms/:roomId/leave` | Tartışma odasından ayrıl | ✅ |
-| GET | `/debateRooms/debate/:debateId` | Tartışmaya ait odaları listele | ❌ |
-| GET | `/debateRooms/:roomId` | Belirli bir odanın detayları | ❌ |
-| GET | `/debateRooms` | Tüm odaları listele | ❌ |
-| PATCH | `/debateRooms/:roomId/status` | Oda durumunu güncelle | ✅ |
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/debateRooms/create` | Create new debate room | ✅ |
+| POST | `/debateRooms/join` | Join debate room | ✅ |
+| POST | `/debateRooms/:roomId/leave` | Leave debate room | ✅ |
+| GET | `/debateRooms/debate/:debateId` | List rooms for debate | ❌ |
+| GET | `/debateRooms/:roomId` | Get specific room details | ❌ |
+| GET | `/debateRooms` | List all rooms | ❌ |
+| PATCH | `/debateRooms/:roomId/status` | Update room status | ✅ |
 
-## 🔄 Tartışma Kategorileri
+## 🔄 Debate Categories
 
-- GENERAL (Genel)
-- POLITICS (Siyaset)  
-- TECHNOLOGY (Teknoloji)
-- SCIENCE (Bilim)
-- SPORTS (Spor)
-- ENTERTAINMENT (Eğlence)
-- EDUCATION (Eğitim)
-- HEALTH (Sağlık)
-- ENVIRONMENT (Çevre)
-- BUSINESS (İş)
-- PHILOSOPHY (Felsefe)
-- SOCIAL_ISSUES (Sosyal Konular)
+- GENERAL
+- POLITICS  
+- TECHNOLOGY
+- SCIENCE
+- SPORTS
+- ENTERTAINMENT
+- EDUCATION
+- HEALTH
+- ENVIRONMENT
+- BUSINESS
+- PHILOSOPHY
+- SOCIAL_ISSUES
 
-## 📊 Durumlar
+## 📊 Status Types
 
-### Tartışma Durumları
-- **PENDING**: Beklemede
-- **LIVE**: Canlı
-- **FINISHED**: Tamamlandı
+### Debate Status
+- **PENDING**: Pending
+- **LIVE**: Live
+- **FINISHED**: Finished
 
-### Oda Durumları
-- **WAITING**: Bekliyor
-- **LIVE**: Canlı
-- **FINISHED**: Tamamlandı
+### Room Status
+- **WAITING**: Waiting
+- **LIVE**: Live
+- **FINISHED**: Finished
 
-### Katılımcı Rolleri
-- **PROPOSER**: Fikri savunan
-- **OPPONENT**: Fikri reddeden
-- **AUDIENCE**: İzleyici
+### Participant Roles
+- **PROPOSER**: Defender of the idea
+- **OPPONENT**: Opponent of the idea
+- **AUDIENCE**: Audience
 
-## 🛠️ Development Komutları
+## 🛠️ Development Commands
 
 ```bash
-# Geliştirme modunda çalıştır
+# Run in development mode
 npm run start:dev
 
-# Test çalıştır
+# Run tests
 npm run test
 
 # Linting
 npm run lint
 
-# Format kodları
+# Format code
 npm run format
 
 # Production build
 npm run build
 ```
 
-## 📝 Lisans
+## 📝 License
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+This project is licensed under the MIT License.
