@@ -1,299 +1,616 @@
-# 🎯 Debate Backend API<p align="center">
-
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-
-A modern backend API for debate management system built with NestJS, PostgreSQL, and Prisma.</p>
+<div align="center"><div align="center">
 
 
 
-## 🚀 Features[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-### ✅ Implemented
-
-- **User Authentication & Authorization**  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-
-  - JWT-based authentication with access/refresh tokens    <p align="center">
-
-  - User registration and login<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-
-  - Secure password hashing with bcrypt<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-
-  - Protected routes with JWT guards<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-
-- **Debate Management**<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-
-  - Create and manage debates with categories<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-
-  - Join/leave debates<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-
-  - Update debate status and details  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-
-  - Paginated debate listings    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-
-- **Debate Room System**</p>
-
-  - Create debate rooms for specific debates  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-
-  - Join rooms with different roles (Proposer, Opponent, Audience)  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-  - Room status management (Waiting, Live, Finished)
-
-  - Participant tracking and management## Description
+# 🎯 Debate Backend API# 🎯 Debate Backend API
 
 
 
-- **Robust Architecture**[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**A modern REST API for debate management system****A modern REST API for debate management system**
 
-  - Global exception handling with custom filters
 
-  - Consistent API response format with interceptors## Project setup
 
-  - Type-safe database operations with Prisma
+Built with **NestJS** • **PostgreSQL** • **Prisma ORM**Built with **NestJS** • **PostgreSQL** • **Prisma ORM**
 
-  - Modular NestJS architecture```bash
 
-  - Environment-based configuration$ npm install
 
-```
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+
+[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)[![NestJS](https://img.shields.io/badge/NestJS-10.0+-red.svg)](https://nestjs.com/)
+
+[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)[![Prisma](https://img.shields.io/badge/Prisma-5.0+-2D3748.svg)](https://www.prisma.io/)
+
+
+
+</div></div>
+
+
+
+------
+
+
+
+## 🚀 Features## 🚀 Features
+
+
+
+<div align="center"><div align="center">
+
+
+
+### 🔐 Authentication & Authorization### 🔐 Authentication & Authorization
+
+JWT-based authentication • User registration & login • Secure password hashing • Protected routesJWT-based authentication • User registration & login • Secure password hashing • Protected routes
+
+
+
+### 💬 Debate Management  ### 💬 Debate Management  
+
+Create & manage debates • Multiple categories • Join/leave functionality • Status trackingCreate & manage debates • Multiple categories • Join/leave functionality • Status tracking
+
+
+
+### 🏛️ Debate Room System### 🏛️ Debate Room System
+
+Room creation • Multi-role participation • Real-time status • Participant managementRoom creation • Multi-role participation • Real-time status • Participant management
+
+
+
+### 🏗️ Robust Architecture### 🏗️ Robust Architecture
+
+Global exception handling • Consistent API responses • Type-safe operations • Modular designGlobal exception handling • Consistent API responses • Type-safe operations • Modular design
+
+
+
+</div></div>
+
+
+
+---  - Create debate rooms for specific debates  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+
+
+
+## 🛠️ Tech Stack  - Join rooms with different roles (Proposer, Opponent, Audience)  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+
+
+<table align="center">  - Room status management (Waiting, Live, Finished)
+
+<tr>
+
+<td align="center" width="96">  - Participant tracking and management## Description
+
+<img src="https://nestjs.com/img/logo-small.svg" width="48" height="48" alt="NestJS" />
+
+<br><strong>NestJS</strong>
+
+</td>
+
+<td align="center" width="96">- **Robust Architecture**[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" width="48" height="48" alt="PostgreSQL" />
+
+<br><strong>PostgreSQL</strong>  - Global exception handling with custom filters
+
+</td>
+
+<td align="center" width="96">  - Consistent API response format with interceptors## Project setup
+
+<img src="https://www.prisma.io/images/favicon-32x32.png" width="48" height="48" alt="Prisma" />
+
+<br><strong>Prisma</strong>  - Type-safe database operations with Prisma
+
+</td>
+
+<td align="center" width="96">  - Modular NestJS architecture```bash
+
+<img src="https://jwt.io/img/pic_logo.svg" width="48" height="48" alt="JWT" />
+
+<br><strong>JWT</strong>  - Environment-based configuration$ npm install
+
+</td>
+
+</tr>```
+
+</table>
 
 ### 🔧 Technical Stack
 
+---
+
 - **Framework**: NestJS (Node.js)## Compile and run the project
+
+## 📋 Prerequisites
 
 - **Database**: PostgreSQL with Prisma ORM
 
-- **Authentication**: JWT tokens```bash
+- **Node.js** v18 or higher
+
+- **PostgreSQL** database- **Authentication**: JWT tokens```bash
+
+- **npm** or **yarn** package manager
 
 - **Validation**: class-validator decorators# development
 
+---
+
 - **Architecture**: Clean architecture with separation of concerns$ npm run start
 
+## 🚀 Quick Start
 
 
-## 📋 Prerequisites# watch mode
 
-$ npm run start:dev
+### 1️⃣ Clone & Install
 
-- Node.js (v18 or higher)
+```bash## 📋 Prerequisites# watch mode
 
-- PostgreSQL database# production mode
+git clone https://github.com/FurkanSemizoglu/Debate-Backend.git
 
-- npm or yarn package manager$ npm run start:prod
+cd debate-backend$ npm run start:dev
 
-```
+npm install
 
-## 🛠️ Installation
+```- Node.js (v18 or higher)
 
-## Run tests
 
-1. **Clone the repository**
 
-```bash```bash
-
-git clone <repository-url># unit tests
-
-cd debate-backend$ npm run test
-
-```
-
-# e2e tests
-
-2. **Install dependencies**$ npm run test:e2e
+### 2️⃣ Environment Setup- PostgreSQL database# production mode
 
 ```bash
 
-npm install# test coverage
+# Copy environment file- npm or yarn package manager$ npm run start:prod
 
-```$ npm run test:cov
+cp .env.example .env
 
-```
+``````
 
-3. **Environment setup**
 
-```bash## Deployment
 
-# Copy and configure environment variables
+**Required environment variables:**## 🛠️ Installation
 
-cp .env.example .envWhen you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+```env
 
-```
+DATABASE_URL="postgresql://user:password@localhost:5432/debate_db"## Run tests
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+JWT_SECRET="your-super-secure-jwt-secret-key"
 
-Required environment variables:
-
-```env```bash
-
-DATABASE_URL="postgresql://user:password@localhost:5432/debate_db?schema=public"$ npm install -g @nestjs/mau
-
-JWT_SECRET="your-super-secure-jwt-secret-key"$ mau deploy
-
-PORT=3001```
+PORT=30011. **Clone the repository**
 
 CORS_ORIGINS="http://localhost:3000"
 
-```With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+``````bash```bash
 
 
 
-4. **Database setup**## Resources
+### 3️⃣ Database Setupgit clone <repository-url># unit tests
 
 ```bash
 
-# Generate Prisma clientCheck out a few resources that may come in handy when working with NestJS:
+# Generate Prisma clientcd debate-backend$ npm run test
 
 npx prisma generate
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+```
 
-# Run database migrations- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+# Run migrations
 
-npx prisma migrate dev- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+npx prisma migrate dev# e2e tests
 
-```- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+```
 
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+2. **Install dependencies**$ npm run test:e2e
 
-## 🏃‍♂️ Running the Application- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+### 4️⃣ Start Development Server
 
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+```bash```bash
 
-```bash- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Development mode with hot reload
 
-# Development mode
-
-npm run start:dev## Support
+npm run start:devnpm install# test coverage
 
 
 
-# Production modeNest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Production mode```$ npm run test:cov
 
 npm run start:prod
 
-## Stay in touch
+``````
 
-# Debug mode
 
-npm run start:debug- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 
-```- Website - [https://nestjs.com](https://nestjs.com/)
+🎉 **API will be available at:** `http://localhost:3001`3. **Environment setup**
 
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-The API will be available at `http://localhost:3001`
 
-## License
+---```bash## Deployment
 
-## 📚 API Endpoints
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
-### Authentication
-- `POST /auth/register` - User registration
-- `POST /auth/login` - User login
-- `POST /auth/refresh` - Refresh access token
-- `POST /auth/logout` - User logout
-- `GET /auth/profile` - Get user profile
+## 📚 API Documentation# Copy and configure environment variables
 
-### Debates
-- `GET /debates/getAllDebates` - List all debates (with pagination)
-- `GET /debates/getUsersDebates` - Get user's debates
-- `GET /debates/getDebate/:id` - Get specific debate
-- `POST /debates/createDebate` - Create new debate (protected)
-- `PATCH /debates/updateDebate/:id` - Update debate (protected)
-- `DELETE /debates/deleteDebate/:id` - Delete debate (protected)
 
-### Debate Rooms
-- `GET /debateRooms` - List all rooms
-- `GET /debateRooms/debate/:debateId` - Get rooms for specific debate
-- `GET /debateRooms/:roomId` - Get room details
-- `POST /debateRooms/create` - Create new room (protected)
-- `POST /debateRooms/join` - Join a room (protected)
-- `POST /debateRooms/:roomId/leave` - Leave a room (protected)
-- `PATCH /debateRooms/:roomId/status` - Update room status (protected)
+
+### 🔐 Authentication Endpointscp .env.example .envWhen you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+
+
+
+| Method | Endpoint | Description | Auth Required |```
+
+|--------|----------|-------------|---------------|
+
+| `POST` | `/auth/register` | User registration | ❌ |If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+
+| `POST` | `/auth/login` | User login | ❌ |
+
+| `POST` | `/auth/refresh` | Refresh access token | ❌ |Required environment variables:
+
+| `POST` | `/auth/logout` | User logout | ✅ |
+
+| `GET` | `/auth/profile` | Get user profile | ✅ |```env```bash
+
+
+
+### 💬 Debate EndpointsDATABASE_URL="postgresql://user:password@localhost:5432/debate_db?schema=public"$ npm install -g @nestjs/mau
+
+
+
+| Method | Endpoint | Description | Auth Required |JWT_SECRET="your-super-secure-jwt-secret-key"$ mau deploy
+
+|--------|----------|-------------|---------------|
+
+| `GET` | `/debates/getAllDebates` | List all debates (paginated) | ❌ |PORT=3001```
+
+| `GET` | `/debates/getUsersDebates` | Get user's debates | ✅ |
+
+| `GET` | `/debates/getDebate/:id` | Get specific debate | ❌ |CORS_ORIGINS="http://localhost:3000"
+
+| `POST` | `/debates/createDebate` | Create new debate | ✅ |
+
+| `PATCH` | `/debates/updateDebate/:id` | Update debate | ✅ |```With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+| `DELETE` | `/debates/deleteDebate/:id` | Delete debate | ✅ |
+
+
+
+### 🏛️ Debate Room Endpoints
+
+4. **Database setup**## Resources
+
+| Method | Endpoint | Description | Auth Required |
+
+|--------|----------|-------------|---------------|```bash
+
+| `GET` | `/debateRooms` | List all rooms | ❌ |
+
+| `GET` | `/debateRooms/debate/:debateId` | Get rooms for debate | ❌ |# Generate Prisma clientCheck out a few resources that may come in handy when working with NestJS:
+
+| `GET` | `/debateRooms/:roomId` | Get room details | ❌ |
+
+| `POST` | `/debateRooms/create` | Create new room | ✅ |npx prisma generate
+
+| `POST` | `/debateRooms/join` | Join a room | ✅ |
+
+| `POST` | `/debateRooms/:roomId/leave` | Leave a room | ✅ |- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+
+| `PATCH` | `/debateRooms/:roomId/status` | Update room status | ✅ |
+
+# Run database migrations- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+
+---
+
+npx prisma migrate dev- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
 
 ## 📊 Database Schema
 
-### Core Models
-- **User**: User accounts with authentication
-- **Debate**: Main debate entities with categories
-- **DebateRoom**: Individual debate sessions
-- **DebateParticipant**: Room participation tracking
-- **RefreshToken**: JWT refresh token management
+```- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
 
-### Enums
-- **DebateCategory**: General, Politics, Technology, Science, etc.
-- **DebateStatus**: Pending, Live, Finished
-- **RoomStatus**: Waiting, Live, Finished
+<div align="center">
+
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+
+```mermaid
+
+erDiagram## 🏃‍♂️ Running the Application- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+
+    User ||--o{ Debate : creates
+
+    User ||--o{ RefreshToken : has- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+
+    User ||--o{ DebateParticipant : participates
+
+    Debate ||--o{ DebateRoom : contains```bash- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+    DebateRoom ||--o{ DebateParticipant : has
+
+    # Development mode
+
+    User {
+
+        int id PKnpm run start:dev## Support
+
+        string email UK
+
+        string password
+
+        string fullName
+
+        datetime createdAt# Production modeNest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+        datetime updatedAt
+
+    }npm run start:prod
+
+    
+
+    Debate {## Stay in touch
+
+        int id PK
+
+        string title# Debug mode
+
+        string description
+
+        enum categorynpm run start:debug- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+
+        enum status
+
+        int creatorId FK```- Website - [https://nestjs.com](https://nestjs.com/)
+
+        datetime createdAt
+
+        datetime updatedAt- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+    }
+
+    The API will be available at `http://localhost:3001`
+
+    DebateRoom {
+
+        int id PK## License
+
+        string name
+
+        enum status## 📚 API Endpoints
+
+        int debateId FK
+
+        int creatorId FKNest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+        datetime createdAt
+
+        datetime updatedAt### Authentication
+
+    }- `POST /auth/register` - User registration
+
+    - `POST /auth/login` - User login
+
+    DebateParticipant {- `POST /auth/refresh` - Refresh access token
+
+        int id PK- `POST /auth/logout` - User logout
+
+        int userId FK- `GET /auth/profile` - Get user profile
+
+        int roomId FK
+
+        enum role### Debates
+
+        datetime joinedAt- `GET /debates/getAllDebates` - List all debates (with pagination)
+
+    }- `GET /debates/getUsersDebates` - Get user's debates
+
+```- `GET /debates/getDebate/:id` - Get specific debate
+
+- `POST /debates/createDebate` - Create new debate (protected)
+
+</div>- `PATCH /debates/updateDebate/:id` - Update debate (protected)
+
+- `DELETE /debates/deleteDebate/:id` - Delete debate (protected)
+
+---
+
+### Debate Rooms
+
+## 🔒 API Response Format- `GET /debateRooms` - List all rooms
+
+- `GET /debateRooms/debate/:debateId` - Get rooms for specific debate
+
+### ✅ Success Response- `GET /debateRooms/:roomId` - Get room details
+
+```json- `POST /debateRooms/create` - Create new room (protected)
+
+{- `POST /debateRooms/join` - Join a room (protected)
+
+  "success": true,- `POST /debateRooms/:roomId/leave` - Leave a room (protected)
+
+  "statusCode": 200,- `PATCH /debateRooms/:roomId/status` - Update room status (protected)
+
+  "timestamp": "2025-09-21T09:16:43.608Z",
+
+  "path": "/debates/getAllDebates",## 📊 Database Schema
+
+  "method": "GET",
+
+  "data": {### Core Models
+
+    "debates": [...],- **User**: User accounts with authentication
+
+    "pagination": {- **Debate**: Main debate entities with categories
+
+      "page": 1,- **DebateRoom**: Individual debate sessions
+
+      "limit": 10,- **DebateParticipant**: Room participation tracking
+
+      "total": 25- **RefreshToken**: JWT refresh token management
+
+    }
+
+  },### Enums
+
+  "message": "Data retrieved successfully"- **DebateCategory**: General, Politics, Technology, Science, etc.
+
+}- **DebateStatus**: Pending, Live, Finished
+
+```- **RoomStatus**: Waiting, Live, Finished
+
 - **ParticipantRole**: Proposer, Opponent, Audience
 
-## 🔒 Security Features
+### ❌ Error Response
 
-- JWT-based authentication with refresh tokens
-- Password hashing with bcrypt
-- CORS configuration
-- Input validation and sanitization
-- Error handling without sensitive data exposure
+```json## 🔒 Security Features
+
+{
+
+  "statusCode": 400,- JWT-based authentication with refresh tokens
+
+  "timestamp": "2025-09-21T09:16:43.608Z",- Password hashing with bcrypt
+
+  "path": "/auth/login",- CORS configuration
+
+  "method": "POST",- Input validation and sanitization
+
+  "message": "Invalid credentials",- Error handling without sensitive data exposure
+
+  "error": "Bad Request"
+
+}## 🧪 Testing
+
+```
+
+```bash
+
+---# Unit tests
+
+npm run test
 
 ## 🧪 Testing
 
-```bash
-# Unit tests
-npm run test
-
 # E2E tests
-npm run test:e2e
 
-# Test coverage
+```bashnpm run test:e2e
+
+# Run unit tests
+
+npm run test# Test coverage
+
 npm run test:cov
-```
+
+# Run e2e tests```
+
+npm run test:e2e
 
 ## 📝 Development Notes
 
-- Uses TypeScript for type safety
+# Run test coverage
+
+npm run test:cov- Uses TypeScript for type safety
+
 - Follows NestJS best practices and conventions
-- Implements clean architecture principles
-- Database migrations handled by Prisma
-- Comprehensive error handling and logging
 
-## 🔄 API Response Format
+# Run specific test file- Implements clean architecture principles
 
-All API responses follow a consistent format:
+npm run test auth.service.spec.ts- Database migrations handled by Prisma
 
-```json
+```- Comprehensive error handling and logging
+
+
+
+---## 🔄 API Response Format
+
+
+
+## 📁 Project StructureAll API responses follow a consistent format:
+
+
+
+``````json
+
+src/{
+
+├── common/               # Shared utilities  "success": true,
+
+│   ├── guards/          # JWT Auth guards  "statusCode": 200,
+
+│   ├── filters/         # Exception filters  "timestamp": "2025-09-21T09:16:43.608Z",
+
+│   └── interceptors/    # Response interceptors  "path": "/debates/getAllDebates",
+
+├── config/              # Configuration files  "method": "GET",
+
+├── modules/             # Feature modules  "data": {...},
+
+│   ├── auth/           # Authentication module  "message": "Data retrieved successfully"
+
+│   ├── debate/         # Debate management}
+
+│   ├── debate-room/    # Room management```
+
+│   └── user/           # User management
+
+└── prisma/             # Database serviceError responses:
+
+``````json
+
 {
-  "success": true,
-  "statusCode": 200,
-  "timestamp": "2025-09-21T09:16:43.608Z",
-  "path": "/debates/getAllDebates",
-  "method": "GET",
-  "data": {...},
-  "message": "Data retrieved successfully"
-}
-```
 
-Error responses:
-```json
-{
-  "statusCode": 400,
+---  "statusCode": 400,
+
   "timestamp": "2025-09-21T09:16:43.608Z",
-  "path": "/auth/login",
+
+## 🚧 Development Status  "path": "/auth/login",
+
   "method": "POST",
-  "message": "Invalid credentials",
+
+<div align="center">  "message": "Invalid credentials",
+
   "error": "Bad Request"
-}
+
+**Current Phase:** Core API Development ✅}
+
 ```
 
-## 🚧 Development Status
+| Feature | Status |
 
-This is an active development project. Current implementation focuses on core debate management functionality with room-based architecture.
+|---------|--------|## 🚧 Development Status
+
+| Authentication System | ✅ Complete |
+
+| Debate Management | ✅ Complete |This is an active development project. Current implementation focuses on core debate management functionality with room-based architecture.
+
+| Room System | ✅ Complete |
+
+| Global Error Handling | ✅ Complete |## 📄 License
+
+| API Documentation | ✅ Complete |
+
+| Unit Testing | 🟡 In Progress |This project is [MIT licensed](LICENSE).
+| Real-time Features | ⏳ Planned |
+
+</div>
+
+---
+
+## 🤝 Contributing
+
+1. **Fork** the repository
+2. **Create** your feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+---
 
 ## 📄 License
 
-This project is [MIT licensed](LICENSE).
+This project is **MIT** licensed. See the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**Built with ❤️ by [Furkan Semizoglu](https://github.com/FurkanSemizoglu)**
+
+[![GitHub](https://img.shields.io/badge/GitHub-FurkanSemizoglu-black?style=flat&logo=github)](https://github.com/FurkanSemizoglu)
+
+</div>
