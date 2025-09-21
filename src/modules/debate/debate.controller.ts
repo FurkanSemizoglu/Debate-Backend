@@ -21,20 +21,16 @@ import { JoinDebateDto } from './Dto/join-debate.dto';
 import { AuthGuard } from 'src/common/guards/jwt-auth.guard';
 
 @Controller('debates')
-@UseGuards(AuthGuard)
 export class DebateController {
   constructor(private readonly debateService: DebateService) {}
 
+  @UseGuards(AuthGuard)
   @Post('createDebate')
   async create(@Request() req, @Body() createDebateDto: CreateDebateDto) {
-    try {
-      return await this.debateService.createDebate(
-        req.user.sub,
-        createDebateDto,
-      );
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.createDebate(
+      req.user.sub,
+      createDebateDto,
+    );
   }
 
   @Get('getAllDebates')
@@ -43,11 +39,7 @@ export class DebateController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('status') status?: string,
   ) {
-    try {
-      return await this.debateService.findAllDebates(page, limit, status);
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.findAllDebates(page, limit, status);
   }
 
   @Get('getUsersDebates')
@@ -56,49 +48,35 @@ export class DebateController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ) {
-    try {
-      return await this.debateService.findUserDebates(
-        req.user.sub,
-        page,
-        limit,
-      );
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.findUserDebates(
+      req.user.sub,
+      page,
+      limit,
+    );
   }
 
   @Get('getDebate/:id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    try {
-      return await this.debateService.findDebateById(id);
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.findDebateById(id);
   }
 
+  @UseGuards(AuthGuard)
   @Patch('updateDebate/:id')
   async update(
     @Param('id', ParseUUIDPipe) id: string,
     @Request() req,
     @Body() updateDebateDto: UpdateDebateDto,
   ) {
-    try {
-      return await this.debateService.updateDebate(
-        id,
-        req.user.sub,
-        updateDebateDto,
-      );
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.updateDebate(
+      id,
+      req.user.sub,
+      updateDebateDto,
+    );
   }
 
+  @UseGuards(AuthGuard)
   @Delete('deleteDebate/:id')
   async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
-    try {
-      return await this.debateService.deleteDebate(id, req.user.sub);
-    } catch (error) {
-      throw error;
-    }
+    return await this.debateService.deleteDebate(id, req.user.sub);
   }
 }

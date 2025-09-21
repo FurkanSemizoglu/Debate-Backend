@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
+import type { JwtConfig } from "../../config";
 
 @Injectable()
 export class JwtTokenService {
@@ -16,10 +17,14 @@ export class JwtTokenService {
       sub: user.id
     };
     
-    const secret = this.configService.get<string>('JWT_SECRET');
+    const jwtConfig = this.configService.get<JwtConfig>('jwt');
+    if (!jwtConfig) {
+      throw new Error('JWT configuration not found');
+    }
+    
     return this.jwtService.sign(payload, { 
-      secret,
-      expiresIn: '15m' 
+      secret: jwtConfig.secret,
+      expiresIn: jwtConfig.accessTokenExpiresIn,
     });
   }
 
@@ -28,10 +33,14 @@ export class JwtTokenService {
       sub: user.id
     };
     
-    const secret = this.configService.get<string>('JWT_SECRET');
+    const jwtConfig = this.configService.get<JwtConfig>('jwt');
+    if (!jwtConfig) {
+      throw new Error('JWT configuration not found');
+    }
+    
     return this.jwtService.sign(payload, { 
-      secret,
-      expiresIn: '7d' 
+      secret: jwtConfig.secret,
+      expiresIn: jwtConfig.refreshTokenExpiresIn,
     });
   } 
 }

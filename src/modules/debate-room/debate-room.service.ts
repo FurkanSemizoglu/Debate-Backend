@@ -64,11 +64,7 @@ export class DebateRoomService {
         },
       });
 
-      return {
-        success: true,
-        message: 'Debate room created successfully',
-        data: room,
-      };
+      return room;
     } catch (error) {
       throw error;
     }
@@ -149,11 +145,7 @@ export class DebateRoomService {
         },
       });
 
-      return {
-        success: true,
-        message: 'Successfully joined the debate room',
-        data: participant,
-      };
+      return participant;
     } catch (error) {
       throw error;
     }
@@ -178,10 +170,7 @@ export class DebateRoomService {
         data: { leftAt: new Date() },
       });
 
-      return {
-        success: true,
-        message: 'Successfully left the debate room',
-      };
+      return { leftAt: new Date() };
     } catch (error) {
       throw error;
     }
@@ -217,10 +206,7 @@ export class DebateRoomService {
         orderBy: { createdAt: 'desc' },
       });
 
-      return {
-        success: true,
-        data: rooms,
-      };
+      return rooms;
     } catch (error) {
       throw error;
     }
@@ -321,59 +307,56 @@ export class DebateRoomService {
       const audience = participants.filter((p) => p.role === 'AUDIENCE');
 
       return {
-        success: true,
-        data: {
-          room: {
-            id: room.id,
-            status: room.status,
-            startedAt: room.startedAt,
-            endedAt: room.endedAt,
-            createdAt: room.createdAt,
-          },
-          debate: {
-            id: room.debate.id,
-            title: room.debate.title,
-            topic: room.debate.topic,
-            category: room.debate.category,
-            status: room.debate.status,
-            createdAt: room.debate.createdAt,
-            createdBy: room.debate.createdBy,
-          },
-          participants: {
-            proposers: proposers.map((p) => ({
-              participantId: p.id,
-              user: p.user,
-              role: p.role,
-              joinedAt: p.joinedAt,
-            })),
-            opponents: opponents.map((p) => ({
-              participantId: p.id,
-              user: p.user,
-              role: p.role,
-              joinedAt: p.joinedAt,
-            })),
-            audience: audience.map((p) => ({
-              participantId: p.id,
-              user: p.user,
-              role: p.role,
-              joinedAt: p.joinedAt,
-            })),
-          },
-          participantCounts: {
-            proposers: proposers.length,
-            opponents: opponents.length,
-            audience: audience.length,
-            total: participants.length,
-          },
-          roomStatus: {
-            hasProposer: proposers.length > 0,
-            hasOpponent: opponents.length > 0,
-            canStart: proposers.length > 0 && opponents.length > 0,
-            isReady:
-              proposers.length > 0 &&
-              opponents.length > 0 &&
-              room.status === 'WAITING',
-          },
+        room: {
+          id: room.id,
+          status: room.status,
+          startedAt: room.startedAt,
+          endedAt: room.endedAt,
+          createdAt: room.createdAt,
+        },
+        debate: {
+          id: room.debate.id,
+          title: room.debate.title,
+          topic: room.debate.topic,
+          category: room.debate.category,
+          status: room.debate.status,
+          createdAt: room.debate.createdAt,
+          createdBy: room.debate.createdBy,
+        },
+        participants: {
+          proposers: proposers.map((p) => ({
+            participantId: p.id,
+            user: p.user,
+            role: p.role,
+            joinedAt: p.joinedAt,
+          })),
+          opponents: opponents.map((p) => ({
+            participantId: p.id,
+            user: p.user,
+            role: p.role,
+            joinedAt: p.joinedAt,
+          })),
+          audience: audience.map((p) => ({
+            participantId: p.id,
+            user: p.user,
+            role: p.role,
+            joinedAt: p.joinedAt,
+          })),
+        },
+        participantCounts: {
+          proposers: proposers.length,
+          opponents: opponents.length,
+          audience: audience.length,
+          total: participants.length,
+        },
+        roomStatus: {
+          hasProposer: proposers.length > 0,
+          hasOpponent: opponents.length > 0,
+          canStart: proposers.length > 0 && opponents.length > 0,
+          isReady:
+            proposers.length > 0 &&
+            opponents.length > 0 &&
+            room.status === 'WAITING',
         },
       };
     } catch (error) {
@@ -459,10 +442,7 @@ export class DebateRoomService {
         };
       });
 
-      return {
-        success: true,
-        data: roomsWithDetails,
-      };
+      return roomsWithDetails;
     } catch (error) {
       throw error;
     }
@@ -534,11 +514,7 @@ export class DebateRoomService {
         },
       });
 
-      return {
-        success: true,
-        message: 'Room status updated successfully',
-        data: updatedRoom,
-      };
+      return updatedRoom;
     } catch (error) {
       throw error;
     }

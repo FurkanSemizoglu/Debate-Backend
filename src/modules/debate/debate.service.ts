@@ -55,11 +55,7 @@ export class DebateService {
         },
       });
 
-      return {
-        success: true,
-        message: 'Debate created successfully',
-        data: debate,
-      };
+      return debate;
     } catch (error) {
       if (error.code === 'P2025') {
         throw new NotFoundException('User not found');
