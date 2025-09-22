@@ -14,10 +14,8 @@ async function bootstrap() {
     throw new Error('App configuration not found');
   }
 
-  // Global exception filter'ı ekle
   app.useGlobalFilters(new AllExceptionsFilter());
 
-  // Global response interceptor'ı ekle
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   app.enableCors({
