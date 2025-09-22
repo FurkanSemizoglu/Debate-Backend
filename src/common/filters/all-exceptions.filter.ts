@@ -4,13 +4,13 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-  Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { LoggerService } from '../services/logger.service';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  private readonly logger = new Logger(AllExceptionsFilter.name);
+  constructor(private readonly logger: LoggerService) {}
 
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -46,10 +46,22 @@ export class AllExceptionsFilter implements ExceptionFilter {
     if (status >= 500) {
       this.logger.error(
         `Server Error: ${status} - ${message}`,
-        exception.stack || exception,
+        exception.stack,
+        {
+          url: request.url,
+          method: request.method,
+          ip: request.ip,
+          userAgent: request.headers['user-agent'],
+          body: request.body,
+          query: request.query,
+        }
       );
     } else {
-      this.logger.warn(`Client Error: ${status} - ${message}`);
+      this.logger.warn(`Client Error: ${status} - ${message}`, {
+        url: request.url,
+        method: request.method,
+        ip: request.ip,
+      });
     }
 
     response.status(status).json(errorResponse);

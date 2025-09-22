@@ -6,6 +6,7 @@ import { UserModule } from './modules/user/user.module';
 import { DebateModule } from './modules/debate/debate.module';
 import { DebateRoomModule } from './modules/debate-room/debate-room.module';
 import { configuration, configValidation } from './config';
+import { LoggerService } from './common/services/logger.service';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { configuration, configValidation } from './config';
     DebateRoomModule
   ],
   controllers: [],
-  providers: [],
+  providers: [LoggerService],
 })
 export class AppModule {}

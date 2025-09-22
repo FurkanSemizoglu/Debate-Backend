@@ -3,7 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import type { AppConfig } from './config';
 import { AllExceptionsFilter } from './common/filters';
-import { ResponseInterceptor } from './common/interceptors';
+import { ResponseInterceptor, LoggingInterceptor } from './common/interceptors';
+import { LoggerService } from './common/services/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,9 +15,14 @@ async function bootstrap() {
     throw new Error('App configuration not found');
   }
 
-  app.useGlobalFilters(new AllExceptionsFilter());
+  const loggerService = app.get(LoggerService);
 
-  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new AllExceptionsFilter(loggerService));
+
+  app.useGlobalInterceptors(
+    new ResponseInterceptor(),
+    new LoggingInterceptor(loggerService)
+  );
 
   app.enableCors({
     origin: appConfig.cors.origins,
@@ -26,6 +32,10 @@ async function bootstrap() {
   });
 
   await app.listen(appConfig.port);
-  console.log(`Application is running on: http://localhost:${appConfig.port}`);
+  
+  loggerService.log(`Application is running on: http://localhost:${appConfig.port}`, {
+    port: appConfig.port,
+    environment: process.env.NODE_ENV || 'development',
+  });
 }
 bootstrap();
