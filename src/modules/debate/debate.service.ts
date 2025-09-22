@@ -15,7 +15,6 @@ export class DebateService {
 
   async createDebate(userId: string, createDebateDto: CreateDebateDto) {
     try {
-      // Check if user exists
       const user = await this.prisma.user.findUnique({
         where: { id: userId },
       });
@@ -24,7 +23,6 @@ export class DebateService {
         throw new NotFoundException(`User with ID ${userId} not found`);
       }
 
-      // Create the debate
       const debate = await this.prisma.debate.create({
         data: {
           title: createDebateDto.title,
@@ -32,7 +30,7 @@ export class DebateService {
           category: createDebateDto.category || 'GENERAL',
           createdById: userId,
           users: {
-            connect: { id: userId }, // Creator automatically joins the debate
+            connect: { id: userId },
           },
         },
         include: {
@@ -68,7 +66,6 @@ export class DebateService {
     try {
       const skip = (page - 1) * limit;
 
-      // Build the where clause based on provided filters
       const where = status ? { status: status as any } : {};
 
       const [debates, total] = await Promise.all([
@@ -158,7 +155,6 @@ export class DebateService {
     updateDebateDto: UpdateDebateDto,
   ) {
     try {
-      // First check if debate exists and user is the creator
       const debate = await this.prisma.debate.findUnique({
         where: { id },
         select: { createdById: true },
@@ -199,7 +195,6 @@ export class DebateService {
 
   async deleteDebate(id: string, userId: string) {
     try {
-      // First check if debate exists and user is the creator
       const debate = await this.prisma.debate.findUnique({
         where: { id },
         select: { createdById: true },
@@ -223,7 +218,6 @@ export class DebateService {
 
   async joinDebate(debateId: string, userId: string) {
     try {
-      // Check if debate exists
       const debate = await this.prisma.debate.findUnique({
         where: { id: debateId },
         include: {
@@ -238,7 +232,6 @@ export class DebateService {
         throw new NotFoundException(`Debate with ID ${debateId} not found`);
       }
 
-      // Check if user already joined
       if (debate.users.length > 0) {
         throw new BadRequestException('You have already joined this debate');
       }
@@ -274,7 +267,6 @@ export class DebateService {
 
   async leaveDebate(debateId: string, userId: string) {
     try {
-      // Check if debate exists
       const debate = await this.prisma.debate.findUnique({
         where: { id: debateId },
         include: {
@@ -289,14 +281,12 @@ export class DebateService {
         throw new NotFoundException(`Debate with ID ${debateId} not found`);
       }
 
-      // Check if user is in the debate
       if (debate.users.length === 0) {
         throw new BadRequestException(
           'You are not a participant in this debate',
         );
       }
 
-      // Check if user is the creator (creator cannot leave)
       if (debate.createdById === userId) {
         throw new BadRequestException(
           'The debate creator cannot leave. You must delete the debate instead.',

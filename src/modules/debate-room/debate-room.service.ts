@@ -18,7 +18,6 @@ export class DebateRoomService {
     createDebateRoomDto: CreateDebateRoomDto,
   ) {
     try {
-      // Check if debate exists and user has permission
       const debate = await this.prisma.debate.findUnique({
         where: { id: createDebateRoomDto.debateId },
         include: { createdBy: true },
@@ -72,12 +71,11 @@ export class DebateRoomService {
 
   async joinDebateRoom(userId: string, joinRoomDto: JoinRoomDto) {
     try {
-      // Check if room exists
       const room = await this.prisma.debateRoom.findUnique({
         where: { id: joinRoomDto.roomId },
         include: {
           participants: {
-            where: { leftAt: null }, // Only active participants
+            where: { leftAt: null },
           },
           debate: true,
         },
@@ -93,7 +91,6 @@ export class DebateRoomService {
         throw new BadRequestException('Cannot join a finished room');
       }
 
-      // Check if user is already in the room
       const existingParticipant = room.participants.find(
         (p) => p.userId === userId,
       );
@@ -101,7 +98,6 @@ export class DebateRoomService {
         throw new BadRequestException('User is already in this room');
       }
 
-      // Check role restrictions
       if (
         joinRoomDto.role === ParticipantRole.PROPOSER ||
         joinRoomDto.role === ParticipantRole.OPPONENT
@@ -280,7 +276,7 @@ export class DebateRoomService {
             },
           },
           participants: {
-            where: { leftAt: null }, // Sadece aktif katılımcılar
+            where: { leftAt: null },
             include: {
               user: {
                 select: {
@@ -300,7 +296,6 @@ export class DebateRoomService {
         throw new NotFoundException(`Room with ID ${roomId} not found`);
       }
 
-      // Katılımcıları rollere göre gruplama
       const participants = room.participants;
       const proposers = participants.filter((p) => p.role === 'PROPOSER');
       const opponents = participants.filter((p) => p.role === 'OPPONENT');

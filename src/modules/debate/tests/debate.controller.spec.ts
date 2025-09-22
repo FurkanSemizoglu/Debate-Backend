@@ -6,7 +6,6 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateDebateDto } from '../Dto/create-debate.dto';
 import { UpdateDebateDto } from '../Dto/update-debate.dto';
 
-// Mock data and services
 const mockPrismaService = {
   debate: {
     create: jest.fn(),
@@ -48,7 +47,6 @@ describe('DebateController', () => {
 
   describe('create', () => {
     it('should create a new debate', async () => {
-      // Arrange
       const createDebateDto: CreateDebateDto = {
         title: 'Test Debate',
         topic: 'Testing'
@@ -58,14 +56,10 @@ describe('DebateController', () => {
       
       jest.spyOn(service, 'createDebate').mockResolvedValue(expectedResult as any);
       
-      // Act
       const result = await controller.create(mockRequest, createDebateDto);
       
-      // Assert
       expect(result).toBe(expectedResult);
       expect(service.createDebate).toHaveBeenCalledWith('user-id', createDebateDto);
     });
   });
-
-  // Add more tests for other controller methods...
 });

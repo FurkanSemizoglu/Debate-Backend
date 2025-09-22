@@ -27,7 +27,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       error: this.getErrorName(status),
     };
 
-    // Log the error for debugging
     this.logger.error(
       `HTTP Exception: ${status} - ${exception.message}`,
       exception.stack,

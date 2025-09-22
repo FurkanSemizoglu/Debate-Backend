@@ -39,22 +39,18 @@ describe('DebateRoomService', () => {
     expect(service).toBeDefined();
   });
 
-  // Add more specific tests here
   describe('createDebateRoom', () => {
     it('should create a debate room successfully', async () => {
-      // Implementation here
     });
   });
 
   describe('joinDebateRoom', () => {
     it('should allow user to join a room', async () => {
-      // Implementation here
     });
   });
 
   describe('leaveDebateRoom', () => {
     it('should allow user to leave a room', async () => {
-      // Implementation here
     });
   });
 });

@@ -33,16 +33,13 @@ describe('DebateRoomController', () => {
     expect(controller).toBeDefined();
   });
 
-  // Add more specific tests here
   describe('createRoom', () => {
     it('should create a room successfully', async () => {
-      // Implementation here
     });
   });
 
   describe('joinRoom', () => {
     it('should join a room successfully', async () => {
-      // Implementation here
     });
   });
 });

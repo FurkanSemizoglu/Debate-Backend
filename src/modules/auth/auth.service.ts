@@ -19,18 +19,16 @@ export class AuthService {
     try {
       const validatedUser = await this.validateUser(loginDto.email, loginDto.password);
 
-      // Eski refresh token'ları temizle
       await this.prisma.refreshToken.deleteMany({
         where: { userId: validatedUser.id },
       });
 
-      // Yeni refresh token oluştur ve kaydet
       const refreshToken = this.jwtTokenService.generateRefreshToken(validatedUser);
       await this.prisma.refreshToken.create({
         data: {
           token: refreshToken,
           userId: validatedUser.id,
-          expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 gün
+          expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         },
       });
 
@@ -46,36 +44,7 @@ export class AuthService {
     }
   }
 
-  /*   private generateAccessToken(user: any) {
-    const payload = { 
-      email: user.email, 
-      sub: user.id,
-      role: user.role 
-    };
-    return this.jwtService.sign(payload, { expiresIn: '15m' });
-  }
 
-  private generateRefreshToken(user: any) {
-    const payload = { 
-      sub: user.id
-    };
-    return this.jwtService.sign(payload, { expiresIn: '7d' });
-  } */
-
-/*   async refresh(refreshToken: string) {
-    const tokenRecord = await this.prisma.refreshToken.findUnique({
-      where: { token: refreshToken },
-      include: { user: true },
-    });
-
-    if (!tokenRecord || tokenRecord.expiresAt < new Date()) {
-      throw new UnauthorizedException('Invalid or expired refresh token');
-    }
-
-    return {
-      access_token: this.jwtTokenService.generateAccessToken(tokenRecord.user),
-    };
-  } */
 
   async refresh(refreshToken: string) {
     try {
@@ -93,14 +62,12 @@ export class AuthService {
       }
 
       if (tokenRecord.expiresAt < new Date()) {
-        // Expired token'ı sil
         await this.prisma.refreshToken.delete({
           where: { id: tokenRecord.id },
         });
         throw new UnauthorizedException('Refresh token has expired');
       }
 
-      // Yeni access token oluştur
       const newAccessToken = this.jwtTokenService.generateAccessToken(tokenRecord.user);
 
       return {
@@ -171,7 +138,6 @@ export class AuthService {
 
   async register(registerDto: RegisterDto) {
     try {
-      // Input validation
       if (!registerDto.email || !registerDto.password || !registerDto.name || !registerDto.surname) {
         throw new BadRequestException('All required fields must be provided');
       }
@@ -182,7 +148,6 @@ export class AuthService {
 
       const hashedPassword = await bcrypt.hash(registerDto.password, 10);
 
-      // Email kontrolü
       const existingUser = await this.prisma.user.findUnique({
         where: { email: registerDto.email },
       });
@@ -202,7 +167,6 @@ export class AuthService {
           },
         });
         
-        // Remove password from return object
         const { password: _, ...userWithoutPassword } = user;
         return userWithoutPassword;
       });
@@ -211,7 +175,6 @@ export class AuthService {
         throw error;
       }
       
-      // Handle Prisma unique constraint errors
       if (error.code === 'P2002') {
         throw new BadRequestException('Email already exists');
       }

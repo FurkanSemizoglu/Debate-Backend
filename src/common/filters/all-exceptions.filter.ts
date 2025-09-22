@@ -27,11 +27,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       status = HttpStatus.CONFLICT;
       message = 'A record with this data already exists';
     } else if (exception.code === 'P2025') {
-      // Prisma record not found error
       status = HttpStatus.NOT_FOUND;
       message = 'Record not found';
     } else if (exception.code && exception.code.startsWith('P')) {
-      // Other Prisma errors
       status = HttpStatus.BAD_REQUEST;
       message = 'Database operation failed';
     }
@@ -45,7 +43,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
       error: this.getErrorName(status),
     };
 
-    // Log the error with different levels based on status
     if (status >= 500) {
       this.logger.error(
         `Server Error: ${status} - ${message}`,
